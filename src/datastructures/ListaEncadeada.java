@@ -46,76 +46,107 @@ public class ListaEncadeada<T> {
 			
 		}
 	
-	private static class No<T> {
-		private T dado;
-		private No<T> anterior;
-		private No<T> proximo;
-		
-		
-		public No<T> getAnterior() {
-			return anterior;
+	 private static class No<T> {
+			private T dado;
+			private No<T> anterior;
+			private No<T> proximo;
+			
+			
+			public No<T> getAnterior() {
+				return anterior;
+			}
+			public void setAnterior(No<T> anterior) {
+				this.anterior = anterior;
+			}
+			public T getDado() {
+				return dado;
+			}
+			public void setDado(T dado) {
+				this.dado = dado;
+			}
+			public No<T> getProximo() {
+				return proximo;
+			}
+			public void setProximo(No<T> proximo) {
+				this.proximo = proximo;
+			}
+			public No(T dado) {
+				this.dado = dado;
+				this.proximo = null;
+				this.anterior = null;
+			}
 		}
-		public void setAnterior(No<T> anterior) {
-			this.anterior = anterior;
-		}
-		public T getDado() {
-			return dado;
-		}
-		public void setDado(T dado) {
-			this.dado = dado;
-		}
-		public No<T> getProximo() {
-			return proximo;
-		}
-		public void setProximo(No<T> proximo) {
-			this.proximo = proximo;
-		}
-		public No(T dado) {
-			this.dado = dado;
-			this.proximo = null;
-			this.anterior = null;
-		}
-	}
 	public void addFirst(T dado) {
+		No<T> novo = new  No<>(dado);
+		if (ListVazia()) {
+		
+			head=novo;
+			tail=novo;
+		}else {
+			head.setAnterior(novo);
+			novo.setProximo(head);
+			head=novo;
+		}
+		Tamanho++;
 	
 	
 	}
-	public T search(T key, Comparator<T> cmp)
-	{
-		return null;
+	public T search(T key, Comparator<T> cmp) {
+		No<T> i = head;
+		T obj = null;
+		while (i != null) {
+		obj = i.getDado();
+	if (cmp.compare(key,obj) == 0)
+				break;
+			i = i.getProximo();
+		}
+		if (i == null) {
+		System.out.println(" Sem informações");
+			obj = null;
+		}
+		
+		return obj;
 	}
 	public void printObjects()
-	{
-		
+	{	
+		 	
+		 	No<T> x = head;
+		 		while (x != null) {
+		 			System.out.println(x.getDado());
+		 			x = x.getProximo();
+		 		}
 	}
 	
-	public static ListaEncadeada<model.Aluno> loadFromFile(FileReader arquivo)
-	{ListaEncadeada<Aluno> alunos = new ListaEncadeada<>();
-	Scanner sc;
-	try{
-		sc = new Scanner(new File("data/alunos.csv"));
-		sc.useDelimiter("[,\n]");
-	} catch (FileNotFoundException e) {
-		System.out.println("Arquivo não localizado");
-		return null;
-	}
-	while (sc.hasNext()) {
-		 Aluno aluno = new Aluno();
-		aluno.setMatricula(sc.next());
-		aluno.setNome(sc.next());
-		aluno.setEmail(sc.next());
-		aluno.setIdade(sc.nextInt());
-		aluno.setSexo(sc.next());
-		aluno.setEmpresa(sc.next());
-		aluno.setCidade(sc.next());
-		
-		alunos.append(aluno);
-	}
-
-	sc.close();
-	
-	return alunos;
-}
+	public static ListaEncadeada<model.Aluno> loadFromFile(FileReader arquivo){
+		 
+		  BufferedReader ler = new BufferedReader(arquivo);
+			ListaEncadeada<Aluno> Registro = new ListaEncadeada<Aluno>();
+			try {
+				String linha = ler.readLine();
+				
+	while(linha != null) {
+				
+		String[] atributos = linha.split(",");
+		Aluno Aluno = new Aluno();
+		Aluno.setMatricula(atributos[0]);
+		Aluno.setNome(atributos[1]);
+		Aluno.setEmail(atributos[2]);				
+		Aluno.setIdade(Integer.valueOf(atributos[3]));
+		Aluno.setSexo(atributos[4]);
+		Aluno.setEmpresa(atributos[5]);
+		Aluno.setCidade(atributos[6]);
+		Registro.append((Aluno) Aluno);
+	System.out.println("  "+Aluno);
+		linha = ler.readLine();
+				}
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return Registro;
+		}
 	
 	
 
