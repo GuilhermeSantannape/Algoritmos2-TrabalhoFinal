@@ -17,6 +17,9 @@ public class ProgramaC_Alunos {
 	private static final String cidade = "";
 	
 	public static void main(String[] args) {
+		
+	
+		
 		FileReader arquivo = null;
 		try {
 			arquivo = new FileReader("data/alunos.csv");
@@ -32,3 +35,4 @@ public class ProgramaC_Alunos {
 	}
 
 }
+

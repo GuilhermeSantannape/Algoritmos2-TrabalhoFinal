@@ -12,9 +12,23 @@ public class Aluno {
 	private String Cidade;
 	
 
+	public Aluno(String nome, String email, int idade, String cidade) {
+		this.Nome = nome;
+		this.Email = email;
+		this.Idade = idade;
+		this.Cidade = cidade;
+	}
 	
 	
 	
+
+	public Aluno() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	public String getMatricula() {
 		return Matricula;
 	}

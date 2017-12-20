@@ -3,23 +3,82 @@ package datastructures;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.Scanner;
+import java.io.BufferedReader;
 
+
+import comparators.SearchByName;
 import model.Aluno;
+import predicates.NamePredicate;
 
 public class ListaEncadeada<T> {
 	
+	 private int Tamanho;
+	 Aluno aluno = new Aluno();
+	 
 	
+	private T dado;
+	private No<T> head=null; 
+	private No<T> tail=null; 
+	 
 	
 	public void append(T dado)
 	{
+		No<T> novo = new No<>(dado);
+		if (ListVazia()) {
+			head = novo;
+			tail = novo;
+		} else {
+			novo.setAnterior(tail);
+			tail.setProximo(novo);
+			tail=novo;
+		}
 		
-	}
-	public void addFirst(T dado)
+		Tamanho++;
+	}		
+		
 	
-	{
+
+	 private boolean ListVazia () { // lista vazia
+			return (this.head==null);
+			
+		}
+	
+	private static class No<T> {
+		private T dado;
+		private No<T> anterior;
+		private No<T> proximo;
 		
+		
+		public No<T> getAnterior() {
+			return anterior;
+		}
+		public void setAnterior(No<T> anterior) {
+			this.anterior = anterior;
+		}
+		public T getDado() {
+			return dado;
+		}
+		public void setDado(T dado) {
+			this.dado = dado;
+		}
+		public No<T> getProximo() {
+			return proximo;
+		}
+		public void setProximo(No<T> proximo) {
+			this.proximo = proximo;
+		}
+		public No(T dado) {
+			this.dado = dado;
+			this.proximo = null;
+			this.anterior = null;
+		}
+	}
+	public void addFirst(T dado) {
+	
+	
 	}
 	public T search(T key, Comparator<T> cmp)
 	{
@@ -41,7 +100,7 @@ public class ListaEncadeada<T> {
 		return null;
 	}
 	while (sc.hasNext()) {
-		Aluno aluno = new Aluno();
+		 Aluno aluno = new Aluno();
 		aluno.setMatricula(sc.next());
 		aluno.setNome(sc.next());
 		aluno.setEmail(sc.next());
@@ -59,12 +118,44 @@ public class ListaEncadeada<T> {
 }
 	
 	
+
 	
-	 private No prim;//head
-	 private No ult;//tail
-	 private int QuantNO;
-	 
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	public  void IniciaListaSimples() {// esvazia lista
 		this.prim=null;
 		this.ult=null;
@@ -80,10 +171,7 @@ public class ListaEncadeada<T> {
 			return ult;
 		}
 	 
-	 private boolean ListVazia () { // lista vazia
-			return (this.prim==null);
-			
-		}
+	
 
 	public void setPrim(No prim) {
 		this.prim = prim;
@@ -152,6 +240,6 @@ public class ListaEncadeada<T> {
 }
 	
 
-	
+	*/
 	
 }
